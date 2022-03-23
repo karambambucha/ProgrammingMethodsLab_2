@@ -74,13 +74,13 @@ namespace ProgrammingMethodsLab_2
                 {
                     if (elements[i].Length == 3)
                     {
-                        menuItems[parentsID.Peek()].joinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]));
+                        menuItems[parentsID.Peek()].JoinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]));
                         parentsID.Push(menuItems.Count - 1); 
                         parentsName.Push(elements[i][1]);
                     }
                     else
                     {
-                        menuItems[parentsID.Peek()].joinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]), elements[i][3]);
+                        menuItems[parentsID.Peek()].JoinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]), elements[i][3]);
                     }
                 }
                 else if (Int32.Parse(elements[i][0]) > CurrentLevel)
@@ -92,12 +92,12 @@ namespace ProgrammingMethodsLab_2
                     }
                     if (elements[i].Length == 3)
                     {
-                        menuItems[parentsID.Peek()].joinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]));
+                        menuItems[parentsID.Peek()].JoinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]));
                         parentsID.Push(menuItems.Count - 1); parentsName.Push(elements[i][1]);
                     }
                     else
                     {
-                        menuItems[parentsID.Peek()].joinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]), elements[i][3]);
+                        menuItems[parentsID.Peek()].JoinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]), elements[i][3]);
                     }
                 }
                 else if (Int32.Parse(elements[i][0]) < CurrentLevel)
@@ -118,11 +118,11 @@ namespace ProgrammingMethodsLab_2
                     {
                         if (elements[i].Length == 3)
                         {
-                            menuItems[parentsID.Peek()].joinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]));
+                            menuItems[parentsID.Peek()].JoinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]));
                         }
                         else
                         {
-                            menuItems[parentsID.Peek()].joinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]), elements[i][3]);
+                            menuItems[parentsID.Peek()].JoinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]), elements[i][3]);
                         }
                     }
                     if (elements[i].Length == 3 )
@@ -133,37 +133,36 @@ namespace ProgrammingMethodsLab_2
                 }
                 i++;
             }
-            foreach (MenuItemsTree item in menuItems)
+            foreach (MenuItemsTree treeParent in menuItems)
             {
-                if (item.nextLevelNodes.Count == 0 && item.itemStatus == 0)
-                {
-                    MethodArgs ee = new MethodArgs(item.itemMethod);
-                    item.menuItem.Click += new EventHandler((sender, e) => addedItemClickEvent(sender, ee));
-                }
-                AddChildren(item);
-                if (item.itemStatus == 2)
-                {
-                    item.menuItem.Visible = false;
-                }
-                menuStrip.Items.Add(item.menuItem);
+                SetProperties(treeParent);
+                AddChildren(treeParent);
+                menuStrip.Items.Add(treeParent.MenuItem);
             }
         }
-        public void AddChildren(MenuItemsTree polyTree)
+        private void AddChildren(MenuItemsTree polyTree)
         {
-            foreach (MenuItemsTree tree in polyTree.nextLevelNodes)
+            foreach (MenuItemsTree treeChild in polyTree.nextLevelNodes)
             {
-                if (tree.nextLevelNodes.Count == 0 && tree.itemStatus == 0)
-                {
-                    MethodArgs methodName = new MethodArgs(tree.itemMethod);
-                    tree.menuItem.Click += new EventHandler((sender, e) => addedItemClickEvent(sender, methodName));
-                }
-                polyTree.menuItem.DropDownItems.Add(tree.menuItem);
-                AddChildren(tree);
+                SetProperties(treeChild);
+                AddChildren(treeChild);
+                polyTree.MenuItem.DropDownItems.Add(treeChild.MenuItem);
             }
         }
+        private void SetProperties(MenuItemsTree treeItem)
+		{
+            if (treeItem.nextLevelNodes.Count == 0 && treeItem.ItemStatus == 0)
+            {
+                 MethodArgs methodName = new MethodArgs(treeItem.ItemMethod);
+                 treeItem.MenuItem.Click += new EventHandler((sender, e) => addedItemClickEvent(sender, methodName));
+			}
+            else if (treeItem.ItemStatus == 1)
+                treeItem.MenuItem.Enabled = false;
+            else if (treeItem.ItemStatus == 2)
+                treeItem.MenuItem.Visible = false;
+		}
         private void addedItemClickEvent(object sender, MethodArgs e)
         {
-            
             MessageBox.Show($"Вы нажали на {e.value} ");
         }
     }
