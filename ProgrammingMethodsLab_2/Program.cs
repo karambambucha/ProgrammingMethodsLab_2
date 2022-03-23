@@ -16,7 +16,7 @@ namespace ProgrammingMethodsLab_2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1("text.txt"));
+            Application.Run(new Form1());
         }
     }
 }
