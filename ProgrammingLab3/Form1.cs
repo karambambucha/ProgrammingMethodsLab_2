@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Reflection;
+using System.Linq;
+//using MenuStripCreator; //неявное
 
-namespace ProgrammingMethodsLab_2
+namespace ProgrammingLab3
 {
-    public partial class Lab2 : Form
+    public partial class Form1 : Form
     {
-        public Lab2()
+        public Form1()
         {
-            InitializeComponent();
+            InitializeComponent(); 
             openFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             openFileDialog1.Title = "Открыть файл с структурой меню";
             openFileDialog1.FileName = "";
         }
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
-        }
         private void Button1Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
@@ -23,11 +23,13 @@ namespace ProgrammingMethodsLab_2
             string filename = openFileDialog1.FileName;
             try
             {
-                MenuCreator menu = new MenuCreator(filename, menuStrip1);
+                Assembly asm = Assembly.LoadFrom("MenuCreatorLibrary.dll"); //явное
+                Type type = asm.GetTypes().FirstOrDefault(x => x.Name == "MenuCreator");
+                object obj = Activator.CreateInstance(type, new object[] { filename, menuStrip1 });
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -4,14 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ProgrammingMethodsLab_2
+namespace MenuCreator
 {
     public class MethodArgs : EventArgs
     {
-        public string Value { get; private set; }
+        public string value { get; private set; }
         public MethodArgs(string value)
         {
-            this.Value = value;
+            this.value = value;
         }
     }
     class MenuCreator
@@ -36,7 +36,7 @@ namespace ProgrammingMethodsLab_2
                     f.Close();
                     throw new Exception("В первом или третьем слове строк(и) находятся не числа!");
                 }
-                elements.Add(words); 
+                elements.Add(words);
             }
             f.Close();
             menuItems = new List<MenuItemsTree>();
@@ -72,7 +72,7 @@ namespace ProgrammingMethodsLab_2
                     if (elements[i].Length == 3)
                     {
                         menuItems[parentsID.Peek()].JoinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]));
-                        parentsID.Push(menuItems.Count - 1); 
+                        parentsID.Push(menuItems.Count - 1);
                         parentsName.Push(elements[i][1]);
                     }
                     else
@@ -83,7 +83,7 @@ namespace ProgrammingMethodsLab_2
                 else if (Int32.Parse(elements[i][0]) > CurrentLevel)
                 {
                     CurrentLevel++;
-                    if(Int32.Parse(elements[i][0]) != CurrentLevel || parentsName.Count == 0)
+                    if (Int32.Parse(elements[i][0]) != CurrentLevel || parentsName.Count == 0)
                     {
                         throw new Exception("Неверная иерархия меню!");
                     }
@@ -101,12 +101,12 @@ namespace ProgrammingMethodsLab_2
                 {
                     int difference = CurrentLevel - Int32.Parse(elements[i][0]);
                     CurrentLevel = Int32.Parse(elements[i][0]);
-                    
+
                     if (parentsID.Count() != 0 && parentsName.Count() != 0)
                     {
                         for (int j = 0; j < difference; j++)
                         {
-                            parentsID.Pop();    
+                            parentsID.Pop();
                             parentsName.Pop();
                         }
                     }
@@ -121,9 +121,9 @@ namespace ProgrammingMethodsLab_2
                             menuItems[parentsID.Peek()].JoinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]), elements[i][3]);
                         }
                     }
-                    if (elements[i].Length == 3 )
+                    if (elements[i].Length == 3)
                     {
-                        parentsID.Push(menuItems.Count - 1); 
+                        parentsID.Push(menuItems.Count - 1);
                         parentsName.Push(elements[i][1]);
                     }
                 }
@@ -159,7 +159,7 @@ namespace ProgrammingMethodsLab_2
         }
         private void AddedItemClickEvent(object sender, MethodArgs e)
         {
-            MessageBox.Show($"Вы нажали на {e.Value} ");
+            MessageBox.Show($"Вы нажали на {e.value} ");
         }
     }
 }

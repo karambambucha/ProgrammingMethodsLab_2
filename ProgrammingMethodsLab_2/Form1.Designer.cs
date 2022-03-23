@@ -3,7 +3,7 @@ using System;
 
 namespace ProgrammingMethodsLab_2
 {
-    partial class Form1
+    partial class Lab2
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -41,7 +41,7 @@ namespace ProgrammingMethodsLab_2
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -53,13 +53,13 @@ namespace ProgrammingMethodsLab_2
             this.button1.TabIndex = 1;
             this.button1.Text = "Открыть файл";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1Click);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // Form1
+            // Lab2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -67,7 +67,7 @@ namespace ProgrammingMethodsLab_2
             this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "Lab2";
             this.Text = "Лабораторная работа 2";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);

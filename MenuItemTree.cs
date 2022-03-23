@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace ProgrammingMethodsLab_2
+namespace MenuCreator
 {
     public class MenuItemsTree
     {
