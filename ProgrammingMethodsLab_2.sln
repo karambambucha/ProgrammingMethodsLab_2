@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammingMethodsLab_2", "ProgrammingMethodsLab_2\ProgrammingMethodsLab_2.csproj", "{FEA483FF-A665-4B2B-993A-785C01695A9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MenuStripCreator", "MenuCreator\MenuStripCreator.csproj", "{F080B261-1FA6-48A9-93C6-4A2E258A0F29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FEA483FF-A665-4B2B-993A-785C01695A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEA483FF-A665-4B2B-993A-785C01695A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEA483FF-A665-4B2B-993A-785C01695A9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F080B261-1FA6-48A9-93C6-4A2E258A0F29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F080B261-1FA6-48A9-93C6-4A2E258A0F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F080B261-1FA6-48A9-93C6-4A2E258A0F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F080B261-1FA6-48A9-93C6-4A2E258A0F29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

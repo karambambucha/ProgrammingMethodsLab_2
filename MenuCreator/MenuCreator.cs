@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 
-namespace ProgrammingMethodsLab_2
+namespace MenuStripCreator
 {
     public class MethodArgs : EventArgs
     {
@@ -16,7 +14,7 @@ namespace ProgrammingMethodsLab_2
             this.value = value;
         }
     }
-    class MenuCreator
+    public class MenuCreator
     {
         public List<MenuItemsTree> menuItems;
         public MenuCreator(string filename, MenuStrip menuStrip)
@@ -39,7 +37,7 @@ namespace ProgrammingMethodsLab_2
                     f.Close();
                     throw new Exception("В первом или третьем слове строк(и) находятся не числа!");
                 }
-                elements.Add(words); 
+                elements.Add(words);
             }
             f.Close();
             menuItems = new List<MenuItemsTree>();
@@ -75,7 +73,7 @@ namespace ProgrammingMethodsLab_2
                     if (elements[i].Length == 3)
                     {
                         menuItems[parentsID.Peek()].JoinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]));
-                        parentsID.Push(menuItems.Count - 1); 
+                        parentsID.Push(menuItems.Count - 1);
                         parentsName.Push(elements[i][1]);
                     }
                     else
@@ -86,7 +84,7 @@ namespace ProgrammingMethodsLab_2
                 else if (Int32.Parse(elements[i][0]) > CurrentLevel)
                 {
                     CurrentLevel++;
-                    if(Int32.Parse(elements[i][0]) != CurrentLevel || parentsName.Count == 0)
+                    if (Int32.Parse(elements[i][0]) != CurrentLevel || parentsName.Count == 0)
                     {
                         throw new Exception("Неверная иерархия меню!");
                     }
@@ -104,12 +102,12 @@ namespace ProgrammingMethodsLab_2
                 {
                     int difference = CurrentLevel - Int32.Parse(elements[i][0]);
                     CurrentLevel = Int32.Parse(elements[i][0]);
-                    
+
                     if (parentsID.Count() != 0 && parentsName.Count() != 0)
                     {
                         for (int j = 0; j < difference; j++)
                         {
-                            parentsID.Pop();    
+                            parentsID.Pop();
                             parentsName.Pop();
                         }
                     }
@@ -125,45 +123,46 @@ namespace ProgrammingMethodsLab_2
                             menuItems[parentsID.Peek()].JoinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]), elements[i][3]);
                         }
                     }
-                    if (elements[i].Length == 3 )
+                    if (elements[i].Length == 3)
                     {
-                        parentsID.Push(menuItems.Count - 1); 
+                        parentsID.Push(menuItems.Count - 1);
                         parentsName.Push(elements[i][1]);
                     }
                 }
                 i++;
             }
-            foreach (MenuItemsTree treeParent in menuItems)
+            foreach (MenuItemsTree parentTree in menuItems)
             {
-                SetProperties(treeParent);
-                AddChildren(treeParent);
-                menuStrip.Items.Add(treeParent.MenuItem);
+                SetProperties(parentTree);
+                menuStrip.Items.Add(parentTree.MenuItem);
+                AddChildren(parentTree);
             }
         }
-        private void AddChildren(MenuItemsTree polyTree)
+        private void AddChildren(MenuItemsTree parentTree)
         {
-            foreach (MenuItemsTree treeChild in polyTree.nextLevelNodes)
+            foreach (MenuItemsTree childTree in parentTree.nextLevelNodes)
             {
-                SetProperties(treeChild);
-                AddChildren(treeChild);
-                polyTree.MenuItem.DropDownItems.Add(treeChild.MenuItem);
+                SetProperties(childTree);
+                parentTree.MenuItem.DropDownItems.Add(childTree.MenuItem);
+                AddChildren(childTree);
             }
         }
         private void SetProperties(MenuItemsTree treeItem)
-		{
+        {
             if (treeItem.nextLevelNodes.Count == 0 && treeItem.ItemStatus == 0)
             {
-                 MethodArgs methodName = new MethodArgs(treeItem.ItemMethod);
-                 treeItem.MenuItem.Click += new EventHandler((sender, e) => addedItemClickEvent(sender, methodName));
-			}
+                MethodArgs methodName = new MethodArgs(treeItem.ItemMethod);
+                treeItem.MenuItem.Click += new EventHandler((sender, e) => addedItemClickEvent(sender, methodName));
+            }
             else if (treeItem.ItemStatus == 1)
                 treeItem.MenuItem.Enabled = false;
             else if (treeItem.ItemStatus == 2)
                 treeItem.MenuItem.Visible = false;
-		}
+        }
         private void addedItemClickEvent(object sender, MethodArgs e)
         {
             MessageBox.Show($"Вы нажали на {e.value} ");
         }
     }
 }
+

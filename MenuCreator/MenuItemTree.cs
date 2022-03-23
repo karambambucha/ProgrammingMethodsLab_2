@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace ProgrammingMethodsLab_2
+namespace MenuStripCreator
 {
     public class MenuItemsTree
     {
