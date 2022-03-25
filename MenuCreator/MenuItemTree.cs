@@ -31,9 +31,11 @@ namespace MenuStripCreator
             }
             foreach (MenuItemsTree item in nextLevelNodes)
             {
-                if (item.ItemName == nodeData_) return item;
+                if (item.ItemName == nodeData_)
+                    return item;
                 MenuItemsTree ret = item.FindNode(nodeData_);
-                if (ret != null) return ret;
+                if (ret != null)
+                    return ret;
             }
             return null;
         }

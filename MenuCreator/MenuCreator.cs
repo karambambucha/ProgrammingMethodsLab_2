@@ -82,7 +82,8 @@ namespace MenuStripCreator
                     if (elements[i].Length == 3)
                     {
                         menuItems[parentsID.Peek()].JoinToNode(parentsName.Peek(), elements[i][1], Int32.Parse(elements[i][2]));
-                        parentsID.Push(menuItems.Count - 1); parentsName.Push(elements[i][1]);
+                        parentsID.Push(menuItems.Count - 1);
+                        parentsName.Push(elements[i][1]);
                     }
                     else
                     {

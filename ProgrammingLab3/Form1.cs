@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using System.Reflection;
 using System.Linq;
-//using MenuStripCreator; //неявное
+using MenuStripCreator; //неявное
 
 namespace ProgrammingLab3
 {
@@ -26,6 +26,7 @@ namespace ProgrammingLab3
                 Assembly asm = Assembly.LoadFrom("MenuCreatorLibrary.dll"); //явное
                 Type type = asm.GetTypes().FirstOrDefault(x => x.Name == "MenuCreator");
                 object obj = Activator.CreateInstance(type, new object[] { filename, menuStrip1 });
+                //MenuCreator menu = new MenuCreator(filename, menuStrip1);
             }
             catch (Exception ex)
             {

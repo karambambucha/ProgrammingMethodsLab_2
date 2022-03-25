@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="MenuCreatorLibrary">
-      <HintPath>..\MenuCreator\bin\Debug\netcoreapp3.1\MenuCreatorLibrary.dll</HintPath>
+    <Reference Include="MenuStripCreator">
+      <HintPath>..\..\karambambucha\ProgrammingMethodsLab_2\MenuCreator\bin\Debug\netcoreapp3.1\MenuStripCreator.dll</HintPath>
     </Reference>
   </ItemGroup>
 
